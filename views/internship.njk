@@ -1,0 +1,43 @@
+<html>
+<head>
+    <title>INTERNSHIP</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="col-md-6 col-md-offset-3">
+        <div class="page-header"><h1 class="text-center">{{internshipList.internship[0].course.getName()}}</h1></div>
+        <form action="#" method="post">
+            <div class="form-group col-md-12">
+                <label>Name</label>
+                <label class="form-control">{{internshipList.internship[0].course.getName()}}</label>
+            </div>
+            <div class="form-group col-md-12">
+                <label>StartDate</label>
+                <br>
+                <label class="form-control">{{internshipList.internship[0].course.getDuration().getStartDate()}}</label>
+            </div>
+            <div class="form-group col-md-12">
+                <label>EndDate</label>
+                <br>
+                <label class="form-control">{{internshipList.internship[0].course.getDuration().getEndDate()}}</label>
+            </div>
+            <div class="form-group col-md-12">
+                <label>Status</label>
+                <br>
+                <label class="form-control">{{internshipList.internship[0].course.getStatus()}}</label>
+            </div>
+        </form>
+        <form action="">
+            <div class="page-header"><h1 class="text-center">LIST COMPANY IN INTERNSHIP</h1></div>
+            <ul class="list-group">
+            {% for internship in internshipList.internship %}
+                  <li class="list-group-item">
+                <a href="/detail-company/{{internship.company.getId()}}">{{internship.company.getName()}}</a>
+                    </li>
+            {% endfor %}
+            </ul>
+        </form>
+    </div>
+</body>
+</html>
