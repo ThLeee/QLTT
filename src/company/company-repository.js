@@ -19,12 +19,11 @@ class CompanyRepository {
     }
     get(id) {
         return this.connection
-            .select( 'companies.id', 'companies.name', 'companies.phoneManager', 'companies.emailManager', 'companies.nameManager', 'companies.address',
-                'areas.id as area_id','areas.name as area_name')
+            .select( 'companies.id', 'companies.name', 'companies.phoneManager', 'companies.emailManager', 'companies.nameManager', 'companies.address', 'areas.name as area_name')
             .from('companies')
             .leftJoin('areas', function () {
-                this.on('companies.id', '=', 'ares.company_id')
-            }).where({id : id, deleted_at : null}).then(result => result.map(this.companyFactory.makeFromDB));
+                this.on('companies.id', '=', 'areas.company_id')
+            }).where('companies.deleted_at' , null).where('companies.id',id).then(result => result.map(this.companyFactory.makeFromDB));
     }
     all() {
         return this.connection
