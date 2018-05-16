@@ -48,7 +48,11 @@ router.get('/search-advance', searchAdvance.search);
 
 router.get('/import/interns', internController.import);
 
+router.get('/interns', internController.all);
+
 router.get('/import/lecturer', lecturerController.import);
+
+router.get('/lecturers', lecturerController.all);
 
 /*
     Company

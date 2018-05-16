@@ -36,18 +36,34 @@ class Lecturer {
 
     /**
      *
-     * @param {Contact} contact
+     * @param {string} phone
      */
-    setContact(contact) {
-        this.contact = contact;
+    setPhone(phone) {
+        this.phone = phone;
     }
 
     /**
      *
-     * @return {Contact}
+     * @return {string}
      */
-    getContact() {
-        return this.contact;
+    getPhone() {
+        return this.phone;
+    }
+
+    /**
+     *
+     * @param {string} email
+     */
+    setEmail(email) {
+        this.email = email;
+    }
+
+    /**
+     *
+     * @return {string}
+     */
+    getEmail() {
+        return this.email;
     }
     /**
      *
