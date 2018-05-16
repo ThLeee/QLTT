@@ -9,8 +9,6 @@ class CourseFactory {
      */
     makeFromDB(raw) {
         let company = new Company(raw.name);
-        let area = new Area(raw.company_id, raw.area_name);
-        company.setArea(area);
         company.setId(raw.id);
         company.setAddress(raw.address);
         company.setPhoneManager(raw.phoneManager);
@@ -27,9 +25,6 @@ class CourseFactory {
     makeFromRequest(rawBody) {
         let raw = rawBody.body;
         let company = new Company(raw.name);
-        let area = new Area(raw.company_id, raw.name);
-        company.setArea(area);
-        company.setId(raw.id);
         company.setAddress(raw.address);
         company.setPhoneManager(raw.phoneManager);
         company.setEmailManager(raw.emailManager);
