@@ -7,7 +7,7 @@ class Course {
      * @param {string} name
      * @param {InternshipList} internshipList
      */
-    constructor(startDate, endDate, name, internshipList=[]) {
+    constructor(startDate, endDate, name, internshipList = []) {
         this.startDate      = startDate;
         this.endDate        = endDate;
         this.name           = name;

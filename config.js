@@ -15,7 +15,8 @@ module.exports = {
         require('./src/internship'),
         require('./src/intern'),
         require('./src/internship-registration'),
-
+        require('./src/auth'),
+        // require('./router'),
     ],
 
     database : {

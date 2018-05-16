@@ -1,4 +1,6 @@
 const express         = require('express');
+const session         = require('express-session');
+const MySQLStore      = require('express-mysql-session')(session);
 const path            = require('path');
 //const favicon         = require('serve-favicon');
 const logger          = require('morgan');
@@ -14,6 +16,21 @@ module.exports =function (app) {
         autoescape: true,
         express: app
     });
+    let options = {
+        host: 'localhost',
+        user: 'root',
+        password: 'anhtien1996',
+        database: 'QLTT'
+    };
+
+    let sessionStore = new MySQLStore(options);
+    app.use(session({
+        key : 'session_key',
+        secret : 'bibi',
+        store  : sessionStore,
+        resave : false,
+        saveUninitialized : false
+    }));
 
     app.use(express.static(path.join('public')));
     app.use(logger('dev'));

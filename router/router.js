@@ -4,12 +4,17 @@ const InternController              = require('../http/controller/intern-control
 const LecturerController            = require('../http/controller/lecturer-controller');
 const registration                  = require('../http/controller/registration-controller');
 const CompanyController             = require('../http/controller/company-controller');
-const AreaController             = require('../http/controller/area-controller');
+const AreaController                = require('../http/controller/area-controller');
 const CourseController              = require('../http/controller/course-controller');
 const InternshipController          = require('../http/controller/internship-controller');
 const internshipList                = require('../http/controller/internship-list-controller');
 const SearchAdvance                 = require('../http/controller/search-advanced');
 const checkData                     = require('../http/middleware');
+const LoginController               = require('../http/controller/login-controller');
+
+const loginMiddleware               = require('../http/middleware/login');
+const notRequireLogin               = require('../http/middleware/not-require-login');
+const requireLogin                  = require('../http/middleware/require-login');
 
 let lecturerController              = new LecturerController();
 let internshipController            = new InternshipController();
@@ -18,6 +23,20 @@ let companyController               = new CompanyController();
 let areaController                  = new AreaController();
 let internController                = new InternController();
 let searchAdvance                   = new SearchAdvance();
+let loginController                 = new LoginController();
+
+/*
+    Login
+ */
+router.post('/login', loginMiddleware, requireLogin, loginController.login);
+
+router.get('/home',function(req,res){
+    res.json({home : 'my home after login'})
+});
+
+router.get('/loginView',notRequireLogin,function(req,res) {
+    res.json({view: " login view"});
+});
 /*
     Search Advanced
  */
@@ -49,17 +68,15 @@ router.delete('/company/:id', companyController.remove);
 /*
     Area company
  */
-router.get('/areas', areaController.all);
+router.get('/company/:idCompany/areas',checkData.isCompany, areaController.all);
 
-router.get('/area/:id', areaController.get);
+router.get('/company/:idCompany/area/:id',checkData.isCompany, areaController.get);
 
-router.get('/areas/search-basic', areaController.searchByName);
+router.post('/company/:idCompany/area', checkData.areaRequest, areaController.create);
 
-router.post('/area', checkData.areaRequest, areaController.create);
+router.put('/company/:idCompany/area/:id', checkData.areaRequest, areaController.update);
 
-router.put('/area/:id', checkData.areaRequest, areaController.update);
-
-router.delete('/area/:id', areaController.remove);
+router.delete('/company/:idCompany/area/:id', areaController.remove);
 
 /*
     COURSE

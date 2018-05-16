@@ -17,13 +17,8 @@ class AreaController {
     }
 
     async all(request, response, next) {
-        response.json(await request.app.get('area.repository').all().catch(next))
+        response.json(await request.app.get('area.repository').all(request.company).catch(next))
     }
-
-    async searchByName(request, response, next) {
-        response.json(await request.app.get('area.repository').searchByName(request.query.name).catch(next))
-    }
-
 }
 
 module.exports = AreaController;

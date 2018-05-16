@@ -1,7 +1,7 @@
 
 exports.up = function(knex, Promise) {
-    return knex.schema.createTable('login', function (table) {
-        table.string('user_id').primary();
+    return knex.schema.createTable('users', function (table) {
+        table.string('username').primary();
         table.string('password').notNull();
         table.string('role');
         table.date('archived_at');
@@ -9,5 +9,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-    return knex.schema.dropTable('login');
+    return knex.schema.dropTable('users');
 };
