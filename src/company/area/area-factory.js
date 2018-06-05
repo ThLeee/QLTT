@@ -6,7 +6,8 @@ class AreaFactory {
      * @return {Company}
      */
     makeFromDB(raw) {
-        let area = new Area(raw.company_id, raw.name);
+        let area = new Area(raw.company_id, raw.name, raw.address);
+        area.setId(raw.id);
         return area;
     }
 
@@ -16,7 +17,7 @@ class AreaFactory {
      * @return {Company}
      */
     makeFromRequest(rawBody) {
-        let area = new Area(rawBody.body.company_id, rawBody.body.name);
+        let area = new Area(rawBody.body.company_id, rawBody.body.name, rawBody.body.address);
         area.setId(rawBody.params.id);
         return area;
     }

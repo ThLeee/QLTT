@@ -1,11 +1,13 @@
 
 exports.up = function(knex, Promise) {
-    return knex.schema.createTable('users', function (table) {
-        table.string('username').primary();
+    return knex.schema.createTable('users', (table) => {
+        table.string('user_name').primary();
         table.string('password').notNull();
+        table.string('avatar');
+        table.string('email').notNull();
+        table.string('status');
         table.string('role');
-        table.date('archived_at');
-    })
+    });
 };
 
 exports.down = function(knex, Promise) {

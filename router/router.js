@@ -11,7 +11,7 @@ const internshipList                = require('../http/controller/internship-lis
 const SearchAdvance                 = require('../http/controller/search-advanced');
 const checkData                     = require('../http/middleware');
 const LoginController               = require('../http/controller/login-controller');
-
+const UserController = require('../http/controller/user-controller');
 const loginMiddleware               = require('../http/middleware/login');
 const notRequireLogin               = require('../http/middleware/not-require-login');
 const requireLogin                  = require('../http/middleware/require-login');
@@ -23,13 +23,30 @@ let companyController               = new CompanyController();
 let areaController                  = new AreaController();
 let internController                = new InternController();
 let searchAdvance                   = new SearchAdvance();
-let loginController                 = new LoginController();
+let userController = new UserController();
+/*
+    user
+ */
+
+router.get('/users', userController.checkSignUp);
+
+router.post('/user', checkData.checkSignUp, checkData.user, userController.create);
+
+router.post('/send-code', userController.sendCode);
+
+router.post('/user/check-email', userController.checkEmail);
+
+router.put('/user', checkData.user, userController.update);
+
+router.delete('/user/:user_name', userController.remove);
+
+router.post('/sign-up', userController.signUp);
+
+router.post('/login', checkData.checkLogin, userController.login);
 
 /*
-    Login
+        //////////////////
  */
-router.post('/login', loginMiddleware, requireLogin, loginController.login);
-
 router.get('/home',function(req,res){
     res.json({home : 'my home after login'})
 });
@@ -46,13 +63,33 @@ router.get('/search-advance', searchAdvance.search);
  */
 
 
-router.get('/import/interns', internController.import);
+router.get('/import/interns', checkData.import, internController.importIntern);
 
 router.get('/interns', internController.all);
 
-router.get('/import/lecturer', lecturerController.import);
+router.get('/intern/:id', internController.get);
+
+router.delete('/intern/:id', internController.delete);
+
+router.put('/intern/:id',checkData.isIntern, internController.update);
+
+router.post('/intern', checkData.isIntern , internController.create);
+
+
+/*
+    lecturer
+ */
+router.get('/import/lecturer', lecturerController.importLecturer);
 
 router.get('/lecturers', lecturerController.all);
+
+router.get('/lecturer/:id', lecturerController.get);
+
+router.put('/lecturer/:id',checkData.isLecturer, lecturerController.update);
+
+router.post('/lecturer',checkData.isLecturer, lecturerController.create);
+
+router.delete('/lecturer/:id', lecturerController.delete);
 
 /*
     Company
@@ -96,6 +133,8 @@ router.post('/course',checkData.courseRequest, courseController.create);
 
 router.put('/course/:id', checkData.courseRequest, courseController.update);
 
+router.put('/course/status/:idCourse', checkData.isCourse, courseController.updateStatus);
+
 router.delete('/course/:id', courseController.remove);
 
 /*
@@ -107,9 +146,9 @@ router.get('/course/:idCourse/internships',checkData.isCourse, internshipControl
 
 router.get('/course/:idCourse/internship/:id',checkData.isCourse, internshipController.get);
 
-router.post('/course/:idCourse/internship',checkData.isCourse, internshipController.create);
+router.post('/course/:idCourse/internship',checkData.isCourse,checkData.internshipRequest, internshipController.create);
 
-router.put('/course/:idCourse/internship/:id',checkData.isCourse, internshipController.update);
+router.put('/course/:idCourse/internship/:id',checkData.isCourse, checkData.internshipRequest, internshipController.update);
 
 router.delete('/internship/:id', internshipController.remove);
 /*

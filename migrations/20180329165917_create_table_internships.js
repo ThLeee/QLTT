@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
       table.string('lecturer_code');
       table.string('company_id');
       table.string('deadline');
+      table.string('status');
       table.string('deleted_at');
   })
 };

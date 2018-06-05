@@ -6,13 +6,18 @@ class AreaRepository {
     create(area) {
         return this.connection('areas').insert({
             name : area.getName(),
-            company_id : area.getCompany_id()
+            company_id : area.getCompany_id(),
+            address : area.getAddress()
+        }).then((id) => {
+            area.setId(id);
+            return area;
         })
     }
     update(area) {
         return this.connection('areas').insert({
             name : area.getName(),
-            company_id : area.getCompany_id()
+            company_id : area.getCompany_id(),
+            address : area.getAddress()
         }).where('id',area.getId())
     }
     remove(id) {

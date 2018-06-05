@@ -12,7 +12,7 @@ class InternshipRepository {
     }
     searchByCourse(course) {
         return this.connection
-            .select( 'companies.id', 'companies.name', 'companies.phoneManager', 'companies.emailManager', 'companies.nameManager', 'companies.address',
+            .select('internships.course_id', 'companies.id', 'companies.name', 'companies.phoneManager', 'companies.emailManager', 'companies.nameManager', 'companies.address',
                 'internships.id as internship_id','internships.deadline', 'lecturers.code', 'lecturers.name as lecturer_name', 'lecturers.gender', 'lecturers.phone', 'lecturers.email', 'lecturers.address as lecturer_address')
             .from('internships')
             .leftJoin('companies', function () {
@@ -24,26 +24,24 @@ class InternshipRepository {
             .then(results => results.map(this.internshipFactory.makeFromDB));
     }
     create(internship) {
+        console.log(internship);
         return this.connection('internships').insert({
-            startDate : internship.getStartDate(),
-            endDate : internship.getEndDate(),
             course_id : internship.getCourse().getId(),
             company_id : internship.getCompany().getId(),
             lecturer_code : internship.getLecturer().getCode(),
+            deadline: internship.getDeadline(),
             status : status.OPEN
-        })
+        }).then(() => internship)
     }
     update(internship) {
         return this.connection('internships').update({
-            startDate : internship.getStartDate(),
-            endDate : internship.getEndDate(),
             course_id : internship.getCourse().getId(),
             company_id : internship.getCompany().getId(),
             lecturer_code : internship.getLecturer().getCode(),
-            status : internship.getStatus()
+            deadline: internship.getDeadline(),
         }).where({
             id: internship.getId()
-        })
+        }).then(() => internship)
     }
     remove(internship_id) {
         return this.connection('internships').update({
@@ -57,7 +55,7 @@ class InternshipRepository {
     }
     all() {
         return this.connection
-            .select( 'companies.id', 'companies.name', 'companies.phoneManager', 'companies.emailManager', 'companies.nameManager', 'companies.address',
+            .select('internships.course_id', 'companies.id', 'companies.name', 'companies.phoneManager', 'companies.emailManager', 'companies.nameManager', 'companies.address',
                 'internships.id as internship_id','internships.deadline', 'lecturers.code', 'lecturers.name as lecturer_name', 'lecturers.gender', 'lecturers.phone', 'lecturers.email', 'lecturers.address as lecturer_address')
             .from('internships')
             .leftJoin('companies', function () {
@@ -71,7 +69,7 @@ class InternshipRepository {
     }
     get(id,course) {
         return this.connection
-            .select( 'companies.id', 'companies.name', 'companies.phoneManager', 'companies.emailManager', 'companies.nameManager', 'companies.address',
+            .select('internships.course_id', 'companies.id', 'companies.name', 'companies.phoneManager', 'companies.emailManager', 'companies.nameManager', 'companies.address',
                 'internships.id as internship_id','internships.deadline', 'lecturers.code', 'lecturers.name as lecturer_name', 'lecturers.gender', 'lecturers.phone', 'lecturers.email', 'lecturers.address as lecturer_address')
             .from('internships')
             .leftJoin('companies', function () {

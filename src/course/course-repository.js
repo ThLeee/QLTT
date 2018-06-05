@@ -8,7 +8,7 @@ class CourseRepository {
 
     all() {
         return this.connection('courses')
-            .where({deleted_at: null, status: status.OPEN})
+            .where({deleted_at: null})
             .then(courses =>courses.map(this.courseFactory.makeFromDB));
     }
 
@@ -43,6 +43,15 @@ class CourseRepository {
             endDate : course.getEndDate(),
             status : course.getStatus()
         }).where('id', course.getId()).then(() => course)
+    }
+
+    updateStatus(course) {
+        return this.connection('courses').update({
+            status : course.getStatus()==='OPEN' ? 'CLOSE' : 'OPEN',
+        }).where('id', course.getId()).then(() => {
+            course.setStatus(course.getStatus()==='OPEN' ? 'CLOSE' : 'OPEN');
+            return course
+        })
     }
 
     remove(id) {

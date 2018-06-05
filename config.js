@@ -16,6 +16,7 @@ module.exports = {
         require('./src/intern'),
         require('./src/internship-registration'),
         require('./src/auth'),
+        require('./src/user')
         // require('./router'),
     ],
 
@@ -25,7 +26,8 @@ module.exports = {
             host: process.env.DB_HOST || 'localhost',
             user: process.env.DB_USER || 'root',
             password: process.env.DB_PASS || 'anhtien1996',
-            database: process.env.DB_DATA || 'QLTT'
+            database: process.env.DB_DATA || 'QLTT',
+            charset : process.env.DB_TEXT || 'utf8'
         }
     }
 };

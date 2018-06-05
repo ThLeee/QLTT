@@ -14,6 +14,9 @@ class CourseController {
     async update(request, response, next) {
         response.json(await request.app.get('course.repository').update(request.course).catch(next));
     }
+    async updateStatus(request, response, next) {
+        response.json(await request.app.get('course.repository').updateStatus(request.course).catch(next));
+    }
 
     async remove(request, response, next) {
         let course = request.app.get('course.repository').remove(request.params.id).catch(next);
