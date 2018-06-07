@@ -10,11 +10,8 @@ const InternshipController          = require('../http/controller/internship-con
 const internshipList                = require('../http/controller/internship-list-controller');
 const SearchAdvance                 = require('../http/controller/search-advanced');
 const checkData                     = require('../http/middleware');
-const LoginController               = require('../http/controller/login-controller');
 const UserController = require('../http/controller/user-controller');
-const loginMiddleware               = require('../http/middleware/login');
 const notRequireLogin               = require('../http/middleware/not-require-login');
-const requireLogin                  = require('../http/middleware/require-login');
 
 let lecturerController              = new LecturerController();
 let internshipController            = new InternshipController();
@@ -63,7 +60,7 @@ router.get('/search-advance', searchAdvance.search);
  */
 
 
-router.get('/import/interns', checkData.import, internController.importIntern);
+router.post('/import/interns', checkData.import, internController.importIntern);
 
 router.get('/interns', internController.all);
 
@@ -79,7 +76,7 @@ router.post('/intern', checkData.isIntern , internController.create);
 /*
     lecturer
  */
-router.get('/import/lecturer', lecturerController.importLecturer);
+router.post('/import/lecturer', checkData.import, lecturerController.importLecturer);
 
 router.get('/lecturers', lecturerController.all);
 
@@ -155,6 +152,10 @@ router.delete('/internship/:id', internshipController.remove);
     list internships
  */
 
+router.get('/confirmed/:id', internshipList.getListCONFIRMEDLecturer);
+
+router.get('/pending/:id', internshipList.getListPENDINGLecturer);
+
 router.get('/internship/confirmed/:id', internshipList.getListCONFIRMED);
 
 router.get('/internship/pending/:id', internshipList.getListPENDING);
@@ -162,8 +163,10 @@ router.get('/internship/pending/:id', internshipList.getListPENDING);
 /*
     Registration
  */
-router.post('/registration/send', registration.registerInternShip);
+router.post('/registration/send/:id', registration.registerInternShip);
 
-router.put('/registration/confirm', registration.confirm);
+router.put('/registration/confirmed/:id', registration.confirm);
+
+router.delete('/registration/:id', registration.deleteRegistration);
 
 module.exports = router;

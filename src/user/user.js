@@ -61,7 +61,13 @@ class User {
     setRole(role) {
         this.role = role;
     }
+    setCode(code) {
+        this.code = code;
+    }
 
+    getCode() {
+        return this.code;
+    }
     /**
      *
      * @returns {string|*}

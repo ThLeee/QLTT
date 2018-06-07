@@ -15,8 +15,8 @@ class LecturerController {
     async delete(request, response, next) {
         response.json(await request.app.get('lecturer.provider').delete(request.params.id).catch(next))
     }
-    async importLecturer(request, response, next) {
-        response.json(await request.app.get('lecturer.provider').importLecturer(request.body).catch(next))
+    importLecturer(request, response, next) {
+        response.json(request.dataImport.map(async lecturer =>await request.app.get('lecturer.provider').importLecturer(lecturer).catch(next)))
     }
 }
 module.exports = LecturerController;

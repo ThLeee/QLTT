@@ -13,6 +13,7 @@ class UserFactory {
         let hash = await bcrypt.hash(userRaw.password, 10).then( hash => hash);
         user.setPassword(hash);
         user.setAvatar(userRaw.avatar);
+        user.setCode(userRaw.code);
         return user;
     }
 
@@ -26,6 +27,7 @@ class UserFactory {
         user.setPassword(userRaw.password);
         user.setRole(userRaw.role);
         user.setAvatar(userRaw.avatar);
+        user.setCode(userRaw.code);
         return user;
     }
 }

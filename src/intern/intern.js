@@ -151,6 +151,18 @@ class Intern {
     getDateOfBirth() {
         return this.dateOfBirth;
     }
+    setRegistration(registration) {
+        this.registration = registration
+    }
+    getRegistration(){
+        return this.registration
+    }
+    setLecturerCode(code) {
+        this.lecturer_code = code
+    }
+    getLecturerCode() {
+        return this.lecturer_code
+    }
 }
 
 

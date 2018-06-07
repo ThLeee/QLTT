@@ -1,6 +1,6 @@
 let XLSX = require('xlsx');
 module.exports = function (request, response, next) {
-    let workbook = XLSX.readFile('/home/tien/WebstormProjects/books/xlsx1.xlsx');
+    let workbook = XLSX.readFile(request.body.file);
     let sheet_name_list = workbook.SheetNames;
 
     let data = [];
@@ -20,6 +20,8 @@ module.exports = function (request, response, next) {
             data[row][headers[col]] = value;
         }
     });
+    data.shift();
+    data.shift();
     request.dataImport = data;
     next();
 };

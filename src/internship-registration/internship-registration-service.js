@@ -9,14 +9,10 @@ class InternShipRegistrationService {
         this.connection   = connection;
     }
 
-    /**
-     *
-     * @param {InternshipRegistration} registration
-     */
-    send(registration) {
+    send(internship_id, intern_code) {
         return this.connection('registrations').insert({
-            intern_id: registration.getIntern().getId(),
-            internship_id: registration.getInternship().getId(),
+            intern_code: intern_code,
+            internship_id: internship_id,
             status: status.PENDING
         })
     }

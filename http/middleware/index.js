@@ -10,3 +10,5 @@ exports.import = require('./import');
 exports.checkLogin = require('./check-login');
 exports.checkSignUp = require('./check-sign-up');
 exports.user        = require('./user-request');
+exports.isInternship = require('./intern-ship-is-open');
+exports.internRegistration = require('./intern-registration');

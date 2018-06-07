@@ -9,11 +9,11 @@ class UserRepository {
     constructor(connection) {
         this.connection = connection;
     }
-
     add(user) {
         return this.connection('users').insert({
             user_name: user.getUser_name(),
             password: user.getPassword(),
+            code: user.getCode(),
             avatar: user.getAvatar(),
             email: user.getEmail(),
             status: status.ACTIVATED
@@ -24,7 +24,8 @@ class UserRepository {
         return this.connection('users').update({
             password: user.getPassword(),
             avatar: user.getAvatar(),
-            email: user.getEmail()
+            email: user.getEmail(),
+            code : user.getCode()
         }).where({user_name: user.getUser_name()});
     }
 
