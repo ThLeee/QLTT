@@ -1,0 +1,21 @@
+
+version: "2"
+
+services:
+  app:
+    build: "."
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+    env_file:
+      - local.env
+    links:
+      - mariadb
+
+  mariadb:
+    image: "mariadb:latest"
+    env_file:
+      - local.env
+    environment:
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
