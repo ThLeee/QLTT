@@ -1,12 +1,12 @@
 branch-defaults:
   master:
-    environment: Qltt-env
+    environment: InternshipSystem-env
 environment-defaults:
-  Qltt-env:
+  InternshipSystem-env:
     branch: null
     repository: null
 global:
-  application_name: QLTT
+  application_name: internship-system
   default_ec2_keyname: null
   default_platform: arn:aws:elasticbeanstalk:us-east-2::platform/Node.js running on
     64bit Amazon Linux/4.5.0
