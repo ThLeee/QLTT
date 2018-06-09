@@ -1,6 +1,6 @@
 module.exports = {
     http: {
-        port : process.env.HTTP_PORT || 8080
+        port : process.env.HTTP_PORT
     },
 
     services : [
