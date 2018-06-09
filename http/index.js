@@ -3,24 +3,17 @@ const session         = require('express-session');
 const MySQLStore      = require('express-mysql-session')(session);
 const path            = require('path');
 //const favicon         = require('serve-favicon');
-const logger          = require('morgan');
 const cookieParser    = require('cookie-parser');
 const bodyParser      = require('body-parser');
-const nunjucks        = require('nunjucks');
 const router          = require('../router/router');
 const cors            = require('cors');
 
 module.exports =function (app) {
-
-    nunjucks.configure('views', {
-        autoescape: true,
-        express: app
-    });
     let options = {
-        host: 'localhost',
-        user: 'root',
-        password: 'anhtien1996',
-        database: 'QLTT'
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASS,
+        database: process.env.DB_DATA
     };
 
     let sessionStore = new MySQLStore(options);
@@ -33,7 +26,6 @@ module.exports =function (app) {
     }));
 
     app.use(express.static(path.join('public')));
-    app.use(logger('dev'));
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
     app.use(cookieParser());
