@@ -1,4 +1,4 @@
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 module.exports = async (req, res, next) => {
     let provide = req.app.get('user.provide');
     provide.provide(req.body.user_name).then( async (user) => {
