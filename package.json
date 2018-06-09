@@ -1,9 +1,9 @@
 {
   "name": "qltt",
   "version": "0.0.0",
-  "private": true,
+  "main" :"index.js",
   "scripts": {
-    "start": "node app.js "
+    "start": "node index"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
