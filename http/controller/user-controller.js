@@ -30,7 +30,13 @@ class UserController {
 
     sendCode(req, res, next) {
         let service = req.app.get('code.service');
-        service.sendCode(req.body.email, req.body.code).then(() => {
+        service.sendCode(req.body).then(() => {
+            res.send('success');
+        }).catch(next)
+    }
+    send(req, res, next) {
+        let service = req.app.get('email.service');
+        service.sendMessage(req.body).then(() => {
             res.send('success');
         }).catch(next)
     }

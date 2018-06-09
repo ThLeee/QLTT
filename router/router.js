@@ -31,6 +31,8 @@ router.post('/user', checkData.checkSignUp, checkData.user, userController.creat
 
 router.post('/send-code', userController.sendCode);
 
+router.post('/send-mail', userController.send);
+
 router.post('/user/check-email', userController.checkEmail);
 
 router.put('/user', checkData.user, userController.update);
