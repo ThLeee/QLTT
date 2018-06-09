@@ -1,4 +1,3 @@
-require('dotenv').config();
 
 let transporter = require('./config-mail');
 

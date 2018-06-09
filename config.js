@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 module.exports = {
     http: {
         port : process.env.HTTP_PORT || 8080
