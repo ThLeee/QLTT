@@ -9,11 +9,15 @@ class AuthSession {
     }
 
     check() {
-        return !this.session.credential;
+        return !this.session.credential.getId();
     }
 
     isGuest() {
-        return this.check();
+        return !this.check();
+    }
+
+    logout() {
+        return this.session.credential = null;
     }
 }
 
