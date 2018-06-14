@@ -24,7 +24,12 @@ class LoginController {
     }
 
     async logout(request, response) {
-
+        let authSession = request.app.get('authSession');
+        authSession.logout();
+        response.json({
+            type : 'success',
+            redirect : 'Login'
+        });
     }
 }
 module.exports = LoginController;
