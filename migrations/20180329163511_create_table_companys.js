@@ -1,5 +1,6 @@
 exports.up = function(knex) {
     return knex.schema.createTable('companies', function (table) {
+        table.charset('utf8');
         table.increments('id');
         table.string('name').notNull();
         table.string('phoneManager');

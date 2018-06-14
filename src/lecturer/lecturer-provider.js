@@ -12,10 +12,12 @@ class LecturerRepository {
             deleted_at : null
         }).then(lecturers=>lecturers.map(this.lecturerFactory.makeFromDB))
     }
+
     all() {
         return this.connection('lecturers').where('deleted_at',null)
             .then(lecturers => lecturers.map(this.lecturerFactory.makeFromDB))
     }
+
     update(lecturer) {
         return this.connection('lecturers').update({
             code : lecturer.getCode(),
@@ -26,11 +28,13 @@ class LecturerRepository {
             address : lecturer.getAddress()
         }).where('code', lecturer.getCode()).then(()=>lecturer)
     }
+
     delete(id) {
         return this.connection('lecturers').update({
             deleted_at : new Date().toLocaleString()
         }).where('code', id)
     }
+
     create(lecturer) {
         return this.connection('lecturers').insert({
             code : lecturer.getCode(),
@@ -41,6 +45,7 @@ class LecturerRepository {
             address : lecturer.getAddress()
         }).then(()=>lecturer)
     }
+
     importLecturer(data) {
         return this.connection('lecturers').insert({
             code : data.code,
