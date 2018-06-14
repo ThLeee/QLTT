@@ -25,6 +25,7 @@ class CredentialServices {
 
         let foundCredential = new Credential(credentialRaw[0].code);
         foundCredential.setId(credentialRaw[0].id);
+        foundCredential.setRole(credentialRaw[0].role);
         return foundCredential;
     }
 }

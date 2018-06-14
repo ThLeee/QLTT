@@ -7,8 +7,7 @@ module.exports = function(app) {
         let userServices = request.app.get('user.services');
         authSession.setSession(request.session);
         if(!authSession.check()){
-            let user = await userServices.getUserByCredential(request.session.credential);
-            request.user = user;
+            request.user = await userServices.getUserByCredential(request.session.credential);
         }
         await next();
     });

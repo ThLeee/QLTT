@@ -1,5 +1,4 @@
-const express                       = require('express');
-const router                        = express.Router();
+const Router                        = require('express').Router;
 const InternController              = require('../http/controller/intern-controller');
 const LecturerController            = require('../http/controller/lecturer-controller');
 const registration                  = require('../http/controller/registration-controller');
@@ -13,6 +12,7 @@ const checkData                     = require('../http/middleware');
 const UserController = require('../http/controller/user-controller');
 const notRequireLogin               = require('../http/middleware/not-require-login');
 
+let router = new Router();
 let lecturerController              = new LecturerController();
 let internshipController            = new InternshipController();
 let courseController                = new CourseController();

@@ -23,6 +23,14 @@ class Credential {
     getId() {
         return this.id;
     }
+
+    setRole(role) {
+        this.role = role;
+    }
+
+    getRole() {
+        return this.role;
+    }
 }
 
 module.exporst = Credential;
