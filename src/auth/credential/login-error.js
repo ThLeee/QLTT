@@ -1,6 +1,5 @@
 class LoginError extends Error {
-
-    constructor() {
+    constructor(){
         super();
     }
 }

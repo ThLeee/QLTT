@@ -1,7 +1,7 @@
-const index = require('express')();
+const app = require('express')();
 
-index.set('config', require('./config'));
+app.set('config', require('./config'));
 
-index.get('config').services.forEach(provider => provider(index));
+app.get('config').services.forEach(provider => provider(app));
 
-index.listen(index.get('config').http.port);
+app.listen(app.get('config').http.port);

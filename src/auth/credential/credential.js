@@ -1,6 +1,6 @@
 class Credential {
 
-    constructor(code, password) {
+    constructor(code) {
         this.code = code;
     }
 
@@ -33,4 +33,4 @@ class Credential {
     }
 }
 
-module.exporst = Credential;
+module.exports = Credential;

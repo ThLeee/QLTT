@@ -1,8 +1,5 @@
 // Update with your config settings.
-
-
 module.exports = {
-
     development: {
         client: 'mysql',
         connection: {
@@ -12,37 +9,5 @@ module.exports = {
             database: process.env.DB_DATA || 'QLTT',
             charset: process.env.DB_TEXT || 'utf8'
         }
-    },
-  staging: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
     }
-  },
-
-  production: {
-    client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
-    pool: {
-      min: 2,
-      max: 10
-    },
-    migrations: {
-      tableName: 'knex_migrations'
-    }
-  }
-
 };

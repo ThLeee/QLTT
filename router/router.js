@@ -10,9 +10,14 @@ const internshipList                = require('../http/controller/internship-lis
 const SearchAdvance                 = require('../http/controller/search-advanced');
 const checkData                     = require('../http/middleware');
 const UserController = require('../http/controller/user-controller');
-const notRequireLogin               = require('../http/middleware/not-require-login');
+const AuthController = require('../http/controller/auth-controller/auth.controller');
 
+const notRequireLogin               = require('../http/middleware/not-require-login');
+const credentialValidator = require('../http/middleware/auth-middleware/credential.middleware');
 let router = new Router();
+
+let authController = new AuthController();
+
 let lecturerController              = new LecturerController();
 let internshipController            = new InternshipController();
 let courseController                = new CourseController();
@@ -21,6 +26,11 @@ let areaController                  = new AreaController();
 let internController                = new InternController();
 let searchAdvance                   = new SearchAdvance();
 let userController = new UserController();
+
+
+//login
+
+router.post('/login', credentialValidator, authController.login);
 /*
     user
  */
@@ -41,7 +51,7 @@ router.delete('/user/:user_name', userController.remove);
 
 router.post('/sign-up', userController.signUp);
 
-router.post('/login', checkData.checkLogin, userController.login);
+//router.post('/login', checkData.checkLogin, userController.login);
 
 /*
         //////////////////

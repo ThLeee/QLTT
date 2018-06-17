@@ -1,5 +1,4 @@
-const Credential = require('./credential');
-
+const LoginError = require('./login-error');
 class CredentialServices {
 
     constructor(connection, hash) {
@@ -16,17 +15,28 @@ class CredentialServices {
         let credentialRaw = await this.connection('credentials').where({code : credential.getCode()});
 
         if (!credentialRaw) {
-            throw new Error('code or password is incorrect');
+            throw new LoginError('code or password is incorrect');
         }
 
         if (!await this.hash.compare(credential.getPassword(), credentialRaw[0].password)){
-            throw new Error('code or password is incorrect');
+            throw new LoginError('code or password is incorrect');
         }
 
-        let foundCredential = new Credential(credentialRaw[0].code);
-        foundCredential.setId(credentialRaw[0].id);
-        foundCredential.setRole(credentialRaw[0].role);
-        return foundCredential;
+        return {
+            id : credentialRaw[0].id,
+            code : credentialRaw[0].code,
+            role : credentialRaw[0].role
+        }
+
+    }
+
+    async createCredential(credential) {
+        let result = await this.connection('credentials').where('code',credential.code);
+
+        if (!result.length) {
+            return await this.connection('credentials').insert(credential);
+        }
+        throw new Error('student code is existed');
     }
 }
 

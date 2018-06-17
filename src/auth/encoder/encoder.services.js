@@ -16,6 +16,7 @@ class EncoderServices {
     hash(source) {
         return this.bcrypt.hash(source, this.rounds);
     }
+
 }
 
 module.exports = EncoderServices;
