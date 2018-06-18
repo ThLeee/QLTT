@@ -7,5 +7,5 @@ exports.up = function(knex) {
 };
 
 exports.down = function(knex) {
-    return knex.schema.dropTable('assignee_lecture');
+    return knex.schema.dropTable('assignee_lectures');
 };
