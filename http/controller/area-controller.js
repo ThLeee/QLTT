@@ -1,5 +1,13 @@
 class AreaController {
 
+    async addIntern(request, response, next) {
+        response.json(await request.app.get('area.repository').addIntern(request.intern).catch(next));
+    }
+
+    async listInternInArea(request, response, next) {
+        response.json(await request.app.get('area.repository').listAllInternInArea(request.area).catch(next));
+    }
+
     async create(request, response, next) {
         response.json(await request.app.get('area.repository').create(request.area).catch(next))
     }

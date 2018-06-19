@@ -16,7 +16,7 @@ class Uploader {
     }
 
     uploadFile(file) {
-        let filename = moment().unix() +"-"+ randomstring.generate() +'.png';
+        let filename = moment().unix() +"-" +'.png';
         this.fs.renameSync(file.path, this.uploadDirectory + filename);
         file.path = this.pathTemplate + filename;
         return file;

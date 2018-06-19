@@ -14,10 +14,23 @@ class CouncilRepository {
         });
     }
 
-   async getCouncilByInternship(internship_id){
+    async removeMember(lecture) {
+        return this.connection.delete().where({
+            lecture_id: lecture.getCode(),
+        });
+    }
+
+    async addMember(council, lecture) {
+        return this.connection('council_lectures').insert({
+            council_id: council.getId(),
+            lecture_id : lecture.getCode(),
+        });
+    }
+
+    async getCouncilByInternship(internship_id){
         return this.connection.select('lecturers.name',
             'councils.name as council_name',
-            'lecturers.code as lecture_code')
+            'lecturers.code as lecture_code', 'councils.position')
             .from('council_lectures')
             .leftJoin('lecturers', function () {
             this.on('lecture_id','=','lecturers.code');

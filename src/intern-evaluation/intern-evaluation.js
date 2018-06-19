@@ -1,26 +1,16 @@
 class InternEvaluation {
 
-    constructor(intern, lecture, council, internship) {
+    constructor(intern, internship) {
         this.internship = internship;
         this.intern = intern;
-        this.lecture = lecture;
-        this.council = council;
     }
 
     getInternship() {
         return this.internship;
     }
 
-    getCouncil() {
-        return this.council;
-    }
-
     getIntern() {
         return this.intern;
-    }
-
-    getLecture() {
-        return this.lecture;
     }
 
     setFirstPoint(firstPoint) {
@@ -34,6 +24,10 @@ class InternEvaluation {
 
     setCompanyPoint(companyPoint) {
         this.companyPoint = companyPoint;
+    }
+
+    getCompanyPoint() {
+        return this.companyPoint;
     }
 
     setLecturePoint(lecturePoint) {
@@ -52,6 +46,15 @@ class InternEvaluation {
     getCouncilPoint() {
         return this.councilPoint;
     }
+
+    setFinalPoint(finalPoint) {
+        this.finalPoint = finalPoint;
+    }
+
+    getFinalPoint() {
+        return this.finalPoint;
+    }
+
 }
 
 module.exports = InternEvaluation;

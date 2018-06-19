@@ -12,22 +12,14 @@ const checkData            = require('../http/middleware');
 const UserController       = require('../http/controller/user-controller');
 const AuthController       = require('../http/controller/auth-controller/auth.controller');
 const CouncilController    = require('../http/controller/council-controller');
+const InternEvaluationController = require('../http/controller/intern-evaluation-controller');
 
 const notRequireLogin      = require('../http/middleware/not-require-login');
 const credentialValidator  = require('../http/middleware/auth-middleware/credential.middleware');
 
-const multer = require('multer');
-let storage = multer.diskStorage({
-    destination : function (req, file, cb) {
-        cb(null, path.join(__dirname, 'public/upload'));
-    },
-    filename : function(req, file, cb) {
-        cb(null, file.filename + '-' + Date.now());
-    }
-});
-const upload = multer(storage);
-
 let router = new Router();
+
+let internEvaluationController = new InternEvaluationController();
 
 let authController = new AuthController();
 
@@ -42,6 +34,13 @@ let internController                = new InternController();
 let searchAdvance                   = new SearchAdvance();
 let userController = new UserController();
 
+
+
+
+//intern-evaluation
+router.post('/intern-evaluation', internEvaluationController.add);
+router.get('/intern-evaluation-high-score', internEvaluationController.getHighScore);
+router.post('/intern-evaluation-rate', internEvaluationController.rate);
 //council
 router.post('/council', councilController.addCouncil);
 router.get('/council-detail-by-internship/:internship_id', councilController.getCouncilByInternship);
@@ -90,7 +89,7 @@ router.get('/search-advance', searchAdvance.search);
  */
 
 
-router.post('/import/interns',upload.single('file'), checkData.import, internController.importIntern);
+router.post('/import/interns', checkData.import, internController.importIntern);
 
 router.get('/interns', internController.all);
 
@@ -146,6 +145,9 @@ router.put('/company/:idCompany/area/:id', checkData.areaRequest, areaController
 
 router.delete('/company/:idCompany/area/:id', areaController.remove);
 
+router.post('/intern-area', areaController.addIntern);
+
+router.get('/intern-area', areaController.listInternInArea);
 /*
     COURSE
 */
