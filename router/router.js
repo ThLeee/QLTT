@@ -44,7 +44,8 @@ router.post('/intern-evaluation-rate', internEvaluationController.rate);
 //council
 router.post('/council', councilController.addCouncil);
 router.get('/council-detail-by-internship/:internship_id', councilController.getCouncilByInternship);
-
+router.post('/council/remove-member', councilController.removeMember);
+router.post('/council/add-member', councilController.addMember);
 //login
 
 router.post('/login', credentialValidator, authController.login);

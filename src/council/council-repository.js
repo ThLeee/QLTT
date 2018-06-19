@@ -5,25 +5,20 @@ class CouncilRepository {
     }
 
     async add(council) {
-        council.getLectures().forEach(async (lecture) => {
-            await this.connection('council_lectures').insert({
-                lecture_id : lecture.getCode(),
-                internship_id : council.getInternship().getId(),
-                council_id : council.getId()
-            })
-        });
+        return this.connection('councils').insert({name : council.name, internship_id: council.internship_id});
     }
 
-    async removeMember(lecture) {
-        return this.connection.delete().where({
-            lecture_id: lecture.getCode(),
+    async removeMember(lecture, council) {
+        return this.connection('council_lectures').delete().where({
+            lecture_id : lecture,
+            council_id : council
         });
     }
 
     async addMember(council, lecture) {
         return this.connection('council_lectures').insert({
-            council_id: council.getId(),
-            lecture_id : lecture.getCode(),
+            council_id: council,
+            lecture_id : lecture,
         });
     }
 
