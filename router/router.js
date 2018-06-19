@@ -1,21 +1,32 @@
-const Router                        = require('express').Router;
-const InternController              = require('../http/controller/intern-controller');
-const LecturerController            = require('../http/controller/lecturer-controller');
-const registration                  = require('../http/controller/registration-controller');
-const CompanyController             = require('../http/controller/company-controller');
-const AreaController                = require('../http/controller/area-controller');
-const CourseController              = require('../http/controller/course-controller');
-const InternshipController          = require('../http/controller/internship-controller');
-const internshipList                = require('../http/controller/internship-list-controller');
-const SearchAdvance                 = require('../http/controller/search-advanced');
-const checkData                     = require('../http/middleware');
-const UserController = require('../http/controller/user-controller');
-const AuthController = require('../http/controller/auth-controller/auth.controller');
+const Router               = require('express').Router;
+const InternController     = require('../http/controller/intern-controller');
+const LecturerController   = require('../http/controller/lecturer-controller');
+const registration         = require('../http/controller/registration-controller');
+const CompanyController    = require('../http/controller/company-controller');
+const AreaController       = require('../http/controller/area-controller');
+const CourseController     = require('../http/controller/course-controller');
+const InternshipController = require('../http/controller/internship-controller');
+const internshipList       = require('../http/controller/internship-list-controller');
+const SearchAdvance        = require('../http/controller/search-advanced');
+const checkData            = require('../http/middleware');
+const UserController       = require('../http/controller/user-controller');
+const AuthController       = require('../http/controller/auth-controller/auth.controller');
+const CouncilController    = require('../http/controller/council-controller');
 
-const CouncilController = require('../http/controller/council-controller');
+const notRequireLogin      = require('../http/middleware/not-require-login');
+const credentialValidator  = require('../http/middleware/auth-middleware/credential.middleware');
 
-const notRequireLogin               = require('../http/middleware/not-require-login');
-const credentialValidator = require('../http/middleware/auth-middleware/credential.middleware');
+const multer = require('multer');
+let storage = multer.diskStorage({
+    destination : function (req, file, cb) {
+        cb(null, path.join(__dirname, 'public/upload'));
+    },
+    filename : function(req, file, cb) {
+        cb(null, file.filename + '-' + Date.now());
+    }
+});
+const upload = multer(storage);
+
 let router = new Router();
 
 let authController = new AuthController();
@@ -31,10 +42,11 @@ let internController                = new InternController();
 let searchAdvance                   = new SearchAdvance();
 let userController = new UserController();
 
+//council
+router.post('/council', councilController.addCouncil);
+router.get('/council-detail-by-internship/:internship_id', councilController.getCouncilByInternship);
 
 //login
-
-router.post('/council', councilController.addCouncil);
 
 router.post('/login', credentialValidator, authController.login);
 /*
@@ -78,7 +90,7 @@ router.get('/search-advance', searchAdvance.search);
  */
 
 
-router.post('/import/interns', checkData.import, internController.importIntern);
+router.post('/import/interns',upload.single('file'), checkData.import, internController.importIntern);
 
 router.get('/interns', internController.all);
 
