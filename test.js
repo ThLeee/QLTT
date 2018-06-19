@@ -4,9 +4,9 @@ const credentialService = require('./src/auth/credential/credential.provider');
 
 (async() => {
     let credential = {
-        code : '1401754',
-        password : await encoder.hash('1111'),
-        role : 'student'
+        code : '1400666',
+        password : await encoder.hash('123456'),
+        role : 'intern'
     };
     try {
         await credentialService.createCredential(credential);
