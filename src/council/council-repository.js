@@ -6,7 +6,11 @@ class CouncilRepository {
 
     add(council) {
         council.getLectures().forEach(async (lecture) => {
-            await this.connection('councils').insert()
+            await this.connection('council_lectures').insert({
+                lecture_id : lecture.getId(),
+                intern_ship : council.getInternship().getId(),
+                council_id : council.getId()
+            })
         });
     }
 

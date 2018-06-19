@@ -1,6 +1,6 @@
 class Council {
 
-    constructor(lectures, internship) {
+    constructor(lectures = [], internship) {
         this.lectures = lectures;
         this.internship = internship;
     }
@@ -11,6 +11,10 @@ class Council {
 
     getInternship () {
         return this.internship;
+    }
+
+    addLecture(lecture) {
+        this.lectures.push({lecture : lecture});
     }
 }
 

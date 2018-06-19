@@ -12,11 +12,15 @@ const checkData                     = require('../http/middleware');
 const UserController = require('../http/controller/user-controller');
 const AuthController = require('../http/controller/auth-controller/auth.controller');
 
+const CouncilController = require('../http/controller/council-controller');
+
 const notRequireLogin               = require('../http/middleware/not-require-login');
 const credentialValidator = require('../http/middleware/auth-middleware/credential.middleware');
 let router = new Router();
 
 let authController = new AuthController();
+
+let councilController = new CouncilController();
 
 let lecturerController              = new LecturerController();
 let internshipController            = new InternshipController();
@@ -29,6 +33,8 @@ let userController = new UserController();
 
 
 //login
+
+router.post('/council', councilController.addCouncil);
 
 router.post('/login', credentialValidator, authController.login);
 /*
