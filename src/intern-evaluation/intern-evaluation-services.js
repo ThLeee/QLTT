@@ -21,7 +21,10 @@ class InternEvaluationService {
         });
     }
 
-    getHightCore(){
+    all(){
+        return this.connection('rates');
+    }
+    getHighCore(){
         return this.connection('rates').orderBy('final','desc').limit(10);
     }
 }

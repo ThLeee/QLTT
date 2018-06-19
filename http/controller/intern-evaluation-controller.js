@@ -12,7 +12,11 @@ class InternEvaluationController {
     }
 
     async getHighScore(req, res, next) {
-        res.json(await internEvaluationServices.getHightCore().catch(next));
+        res.json(await internEvaluationServices.getHighCore().catch(next));
+    }
+
+    async all(req, res, next) {
+        res.json(await internEvaluationServices.all().catch(next));
     }
 }
 
