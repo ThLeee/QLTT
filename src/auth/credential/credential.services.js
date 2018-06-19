@@ -12,6 +12,7 @@ class CredentialServices {
      * @return {Credential}
      */
     async getCredential(credential) {
+        console.log(credential);
         let credentialRaw = await this.connection('credentials').where({code : credential.getCode()});
 
         if (!credentialRaw) {
