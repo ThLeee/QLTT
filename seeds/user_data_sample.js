@@ -1,22 +1,24 @@
 
 exports.seed = function(knex, Promise) {
     // Deletes ALL existing entries
-    return knex('users').truncate()
+    return knex('profile').truncate()
         .then(function () {
             // Inserts seed entries
-            return knex('users').insert([
+            return knex('profile').insert([
                 {
-                    user_name: 'leminhthuy',code : 'DHCNVH2', password: '$2b$10$lPlpLlOw.18Aj4Ro9egjSuVqL4UCOr3gm25TC5RYsyCrIKteR7uUG',
+                    name: 'leminhthuy',
                     avatar: 'http://www.1999.co.jp/itbig48/10485758.jpg',
-                    email: 'sanglv@sphinx-software.com', role: 'admin'},
+                    email: 'sanglv@sphinx-software.com',
+                    gender: 'nam',
+                    credential_id : 1
+                },
                 {
-                    user_name: 'dinhtienduc',code : 'DHCNVH1', password: '$2b$10$lPlpLlOw.18Aj4Ro9egjSuVqL4UCOr3gm25TC5RYsyCrIKteR7uUG',
+                    name: 'leminhthuy2',
                     avatar: 'http://www.1999.co.jp/itbig48/10485758.jpg',
-                    email: 'sanglv@sphinx-software.com', role : 'lecturer'},
-                {
-                    user_name: 'vuviettien',code : '1400659', password: '$2b$10$lPlpLlOw.18Aj4Ro9egjSuVqL4UCOr3gm25TC5RYsyCrIKteR7uUG',
-                    avatar: 'http://www.1999.co.jp/itbig48/10485758.jpg',
-                    email: 'sanglv@sphinx-software.com', role : 'intern'}
+                    email: 'sanglv@sphinx-software.com',
+                    gender: 'nam',
+                    credential_id : 2
+                },
             ]);
         });
 };
