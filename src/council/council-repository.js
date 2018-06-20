@@ -7,7 +7,7 @@ class CouncilRepository {
 
 
     async add(council) {
-        return this.connection('councils').insert({name : council.name, internship_id: council.internship_id});
+        return this.connection('councils').insert({name : council.name, internship_id: council.internship_id , company_name : council.company_name});
     }
 
     async all() {
