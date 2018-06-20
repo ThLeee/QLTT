@@ -11,7 +11,7 @@ class CouncilRepository {
     }
 
     async all() {
-        return this.connection.se('councils');
+        return this.connection.select().from('councils');
     }
 
     async removeMember(lecture_id, council_id) {
