@@ -3,12 +3,12 @@ class InternEvaluationController {
 
     async add(req, res, next) {
         res.json(
-            await internEvaluationServices.add(req.internEvaluation).catch(next)
+            await internEvaluationServices.add(req.body).catch(next)
         );
     }
 
     async rate(req, res, next) {
-        res.json(await internEvaluationServices.rate(req.internEvaluation).catch(next));
+        res.json(await internEvaluationServices.rate(req.body).catch(next));
     }
 
     async getHighScore(req, res, next) {

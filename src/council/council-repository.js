@@ -8,17 +8,17 @@ class CouncilRepository {
         return this.connection('councils').insert({name : council.name, internship_id: council.internship_id});
     }
 
-    async removeMember(lecture, council) {
+    async removeMember(lecture_id, council_id) {
         return this.connection('council_lectures').delete().where({
-            lecture_id : lecture,
-            council_id : council
+            lecture_id : lecture_id,
+            council_id : council_id
         });
     }
 
-    async addMember(council, lecture) {
+    async addMember(council_id, lecture_id) {
         return this.connection('council_lectures').insert({
-            council_id: council,
-            lecture_id : lecture,
+            council_id: council_id,
+            lecture_id : lecture_id,
         });
     }
 
