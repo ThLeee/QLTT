@@ -4,8 +4,14 @@ class CouncilRepository {
         this.connection = connection;
     }
 
+
+
     async add(council) {
         return this.connection('councils').insert({name : council.name, internship_id: council.internship_id});
+    }
+
+    async all() {
+        return this.connection.se('councils');
     }
 
     async removeMember(lecture_id, council_id) {

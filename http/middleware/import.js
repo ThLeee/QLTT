@@ -1,7 +1,6 @@
 let XLSX = require('xlsx');
 module.exports = function (request, response, next) {
-
-    let workbook = XLSX.readFile(`/home/tien/WebStormProject/react/${request.file}`);
+    let workbook = XLSX.readFile(`/home/tien/WebstormProjects/react/${request.body.file}`);
     let sheet_name_list = workbook.SheetNames;
 
     let data = [];

@@ -40,6 +40,7 @@ let userController = new UserController();
 //intern-evaluation
 router.post('/intern-evaluation', internEvaluationController.add);
 router.get('/intern-evaluation-high-score', internEvaluationController.getHighScore);
+router.get('/rates', internEvaluationController.all);
 router.post('/intern-evaluation-rate', internEvaluationController.rate);
 //council
 router.post('/council', councilController.addCouncil);
@@ -106,7 +107,7 @@ router.post('/intern', checkData.isIntern , internController.create);
 /*
     lecturer
  */
-router.post('/import/lecturer', checkData.import, lecturerController.importLecturer);
+router.post('/import/lecturers', checkData.import, lecturerController.importLecturer);
 
 router.get('/lecturers', lecturerController.all);
 
